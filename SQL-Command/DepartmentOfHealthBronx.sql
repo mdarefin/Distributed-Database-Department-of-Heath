@@ -12,26 +12,31 @@ CREATE TABLE Child
     phone       INTEGER ,
     borough     VARCHAR2 (10) CHECK (borough = 'Bronx')
   ) ;
+
 ALTER TABLE Child ADD CONSTRAINT Child_PK PRIMARY KEY ( childID ) ;
 
--- adding 
+-- creating immunization table  
 CREATE TABLE Immunization
   (
     immunizationCode INTEGER NOT NULL ,
     description      VARCHAR2 (200) ,
-    Child_childID    INTEGER NOT NULL
+    childID          INTEGER NOT NULL
   ) ;
 ALTER TABLE Immunization ADD CONSTRAINT Immunization_PK PRIMARY KEY ( immunizationCode ) ;
-ALTER TABLE Immunization ADD CONSTRAINT Immunization_Child_FK FOREIGN KEY ( Child_childID ) REFERENCES Child ( childID ) ;
+ALTER TABLE Immunization ADD CONSTRAINT Immunization_Child_FK FOREIGN KEY ( childID ) REFERENCES Child ( childID ) ;
 
+-- creating Immuization_Event which will keep track of the events
 CREATE TABLE Immunization_Event
   (
     childID          INTEGER NOT NULL ,
     immunizationCode INTEGER ,
-    event_date           DATE NOT NULL ,
-    Child_childID    INTEGER NOT NULL
+    event_date       DATE NOT NULL 
   ) ;
-ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization_Event_PK PRIMARY KEY ( childID, event_date ) ;
-ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization_Event_Child_FK FOREIGN KEY ( Child_childID ) REFERENCES Child ( childID ) ;
+ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization_Event_PK PRIMARY KEY ( childID, immunizationCode, event_date ) ;
+ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization_Event_Child_FK FOREIGN KEY ( childID ) REFERENCES Child ( childID ) ;
+
+
+
+
 
 
