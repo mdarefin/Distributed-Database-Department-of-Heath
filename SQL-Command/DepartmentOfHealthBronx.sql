@@ -1,4 +1,3 @@
-
 -- creating child table with the check constrant borough = 'Bronx'
 CREATE TABLE Child
   (
@@ -35,9 +34,3 @@ CREATE TABLE Immunization_Event
 ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization_Event_PK PRIMARY KEY ( childID, immunizationCode, event_date ) ;
 ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization_Event_Child_FK FOREIGN KEY ( childID ) REFERENCES Child ( childID ) ;
 ALTER TABLE Immunization_Event ADD CONSTRAINT Immunization__Child_FK FOREIGN KEY ( immunizationCode ) REFERENCES Immunization ( immunizationCode ) ;
-
-
-
-
-
-
